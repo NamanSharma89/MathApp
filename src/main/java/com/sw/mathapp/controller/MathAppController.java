@@ -1,5 +1,7 @@
 package com.sw.mathapp.controller;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,11 +33,17 @@ public class MathAppController {
 	@PostMapping("/sortnumbers/{sortNumberInput}")
 	public ResponseEntity<String> getSortedNumberList(@PathVariable(value = "sortNumberInput") final String sortNumberInput) {
 		try {
-			String checkInputForCsvValue= "[0-9, /,]+";
-			boolean resultOfInputStringValidation=sortNumberInput.matches(checkInputForCsvValue);
-			System.out.println(resultOfInputStringValidation);
-			if (!resultOfInputStringValidation) {
-				return new ResponseEntity<>("Input is not a csv string", HttpStatus.BAD_REQUEST);
+			String checkInputForCommaIntValue= "[0-9,]+";
+			String checkInputForDoubleValues= "^[^.]+$";
+			boolean resultOfInputStringValidation=sortNumberInput.matches(checkInputForCommaIntValue);
+			boolean resultOfcheckInputForDoubleValues=sortNumberInput.matches(checkInputForDoubleValues);
+			System.out.println("valid int and comma? " + resultOfInputStringValidation);
+			System.out.println("any double values?" + resultOfcheckInputForDoubleValues);
+			if (!resultOfInputStringValidation && !resultOfcheckInputForDoubleValues) {
+				return new ResponseEntity<>("Input is not a valid csv string", HttpStatus.BAD_REQUEST);
+			} else {
+				int[] numbers = Arrays.stream(sortNumberInput.split(",")).mapToInt(Integer::parseInt).toArray();
+				System.out.println(numbers[2]);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
