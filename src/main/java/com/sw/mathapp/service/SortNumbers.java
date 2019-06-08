@@ -1,18 +1,19 @@
 package com.sw.mathapp.service;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.springframework.stereotype.Service;
 
 @Service
 public class SortNumbers {
 
-	public int getSortedNumberList(final String listOfIntegers) {
-		// Sort the comma separated string to store it in data structure. 
-		// 
-		List<Integer> expList = new ArrayList<>();		
-		
-		return 3;
+	public String getSortedNumberList(ArrayList<Integer> arrayListofCsvString) {		
+		Collections.sort(arrayListofCsvString);	
+		String resultString = "";
+		for (Integer i : arrayListofCsvString) {
+			resultString += i + ",";
+		}
+		return resultString;
 	}
 }

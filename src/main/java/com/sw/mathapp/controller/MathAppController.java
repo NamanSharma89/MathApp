@@ -1,6 +1,9 @@
 package com.sw.mathapp.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,23 +35,29 @@ public class MathAppController {
 
 	@PostMapping("/sortnumbers/{sortNumberInput}")
 	public ResponseEntity<String> getSortedNumberList(@PathVariable(value = "sortNumberInput") final String sortNumberInput) {
-		try {
-			String checkInputForCommaIntValue= "[0-9,]+";
-			String checkInputForDoubleValues= "^[^.]+$";
-			boolean resultOfInputStringValidation=sortNumberInput.matches(checkInputForCommaIntValue);
-			boolean resultOfcheckInputForDoubleValues=sortNumberInput.matches(checkInputForDoubleValues);
-			System.out.println("valid int and comma? " + resultOfInputStringValidation);
-			System.out.println("any double values?" + resultOfcheckInputForDoubleValues);
-			if (!resultOfInputStringValidation && !resultOfcheckInputForDoubleValues) {
-				return new ResponseEntity<>("Input is not a valid csv string", HttpStatus.BAD_REQUEST);
-			} else {
-				int[] numbers = Arrays.stream(sortNumberInput.split(",")).mapToInt(Integer::parseInt).toArray();
-				System.out.println(numbers[2]);
+			try {
+				String checkInputForCommaIntValue= "[0-9,]+";
+				String checkInputForDoubleValues= "^[^.]+$";
+				boolean resultOfInputStringValidation=sortNumberInput.matches(checkInputForCommaIntValue);
+				boolean resultOfcheckInputForDoubleValues=sortNumberInput.matches(checkInputForDoubleValues);
+				System.out.println("valid int and comma? " + resultOfInputStringValidation);
+				System.out.println("any double values?" + resultOfcheckInputForDoubleValues);
+				if (!resultOfInputStringValidation || !resultOfcheckInputForDoubleValues) {
+					return new ResponseEntity<>("Input is not a valid csv string", HttpStatus.BAD_REQUEST);
+				} else {
+					// int[] numbersFromInput = Arrays.stream(sortNumberInput.split(",")).mapToInt(Integer::parseInt).toArray();
+					List<String> numbersFromInput = Arrays.asList(sortNumberInput.split("\\s*,\\s*"));
+					ArrayList<Integer> arrayListofCsvString = new ArrayList<Integer>(numbersFromInput.stream().map(Integer::parseInt).collect(Collectors.toList()));
+					
+					for (Integer int1 : arrayListofCsvString) {
+						System.out.println("at " + int1);
+					}
+					return new ResponseEntity<>("String is a csv and here is the sorted list:" + sortNumbers.getSortedNumberList(arrayListofCsvString), HttpStatus.OK);				
+				}
+			} catch (Exception e) {
+				return new ResponseEntity<>("Exception :" + e, HttpStatus.INTERNAL_SERVER_ERROR);
+				
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return new ResponseEntity<>("String is a csv", HttpStatus.OK);
 	}
 
 }
