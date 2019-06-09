@@ -5,14 +5,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class InputValidator {
 
-	public boolean validateInput(final String inputString) {
-	//	String checkInputForCommaIntValue = "[0-9,]+";
-	//	String checkInputForDoubleValues = "^[^.]+$";
-	//	boolean resultOfInputStringValidation = sortNumberInput.matches(checkInputForCommaIntValue);
-	//	boolean resultOfcheckInputForDoubleValues = sortNumberInput.matches(checkInputForDoubleValues);
+	private static String COMMA_INT_CHECK = "[0-9,]+";
+	private static String DOUBLE_CHECK = "^[^.]+$";
 
-		
-		return true;
+
+	public boolean validate(String toValidate) {
+
+		boolean resultOfInputStringValidation = toValidate.matches(COMMA_INT_CHECK);
+		boolean resultOfCheckInputForDoubleValues = toValidate.matches(DOUBLE_CHECK);
+
+		return resultOfInputStringValidation && resultOfCheckInputForDoubleValues;
+
 	}
 
 }
