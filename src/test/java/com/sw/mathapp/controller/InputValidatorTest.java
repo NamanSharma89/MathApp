@@ -1,5 +1,6 @@
 package com.sw.mathapp.controller;
 
+import com.sw.mathapp.service.SumOfAllDivisors;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,6 +13,8 @@ public class InputValidatorTest {
 
     @InjectMocks
     private InputValidator sut;
+    @InjectMocks
+    private SumOfAllDivisors sumOfAllDivisors_sut;
 
     @Test
     public void testValidate_InputWithSplChars_returnsFalse() {
@@ -46,5 +49,17 @@ public class InputValidatorTest {
         Assert.assertThat(actual, Matchers.is(Boolean.TRUE));
 
     }
+
+    @Test
+    public void test_SumOfAllDivisors_returnsTrue() {
+
+        int validInput = 123;
+
+        final int actual = sumOfAllDivisors_sut.getSumOfAllDivisors(validInput);
+
+        Assert.assertEquals(168,actual);
+
+    }
+
 
 }
