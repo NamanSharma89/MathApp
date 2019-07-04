@@ -14,7 +14,7 @@ public class InputValidator {
 		boolean resultOfInputStringValidation = toValidate.matches(COMMA_INT_CHECK);
 		boolean resultOfCheckInputForDoubleValues = toValidate.matches(DOUBLE_CHECK);
 
-		return resultOfInputStringValidation && resultOfCheckInputForDoubleValues;
+		return resultOfInputStringValidation || resultOfCheckInputForDoubleValues;
 
 	}
 

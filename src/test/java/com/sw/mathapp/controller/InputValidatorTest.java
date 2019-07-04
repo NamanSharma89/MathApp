@@ -42,24 +42,11 @@ public class InputValidatorTest {
     @Test
     public void testValidate_ValidInput_returnsTrue() {
 
-        String validStr = "1,2,3,1,12,19";
+        String validStr = "1,2,4,3,12,19";
 
         final boolean actual = sut.validate(validStr);
 
         Assert.assertThat(actual, Matchers.is(Boolean.TRUE));
 
     }
-
-    @Test
-    public void test_SumOfAllDivisors_returnsTrue() {
-
-        int validInput = 123;
-
-        final int actual = sumOfAllDivisors_sut.getSumOfAllDivisors(validInput);
-
-        Assert.assertEquals(168,actual);
-
-    }
-
-
 }
