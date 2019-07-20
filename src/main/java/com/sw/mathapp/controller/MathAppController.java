@@ -35,16 +35,9 @@ public class MathAppController {
     @PostMapping("/sortnumbers/{sortNumberInput}")
     public ResponseEntity<String> getSortedNumberList(@PathVariable(value = "sortNumberInput") final String sortNumberInput) {
 
-        if (inputValidator.validate(sortNumberInput)) {
+        if (!inputValidator.validate(sortNumberInput)) {
             return new ResponseEntity<>("Input is not a valid csv string", HttpStatus.BAD_REQUEST);
         }
-
-        List<String> numbersFromInput = Arrays.asList(sortNumberInput.split("\\s*,\\s*"));
-        ArrayList<Integer> arrayListofCsvString = new ArrayList<Integer>(
-                numbersFromInput.stream().map(Integer::parseInt).collect(Collectors.toList()));
-
-        return new ResponseEntity<>(sortNumbers.getSortedNumberList(arrayListofCsvString), HttpStatus.OK);
-
+        return new ResponseEntity<>(sortNumbers.getSortedNumberList(sortNumberInput), HttpStatus.OK);
     }
-
 }

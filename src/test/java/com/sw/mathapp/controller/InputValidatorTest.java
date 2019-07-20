@@ -13,8 +13,6 @@ public class InputValidatorTest {
 
     @InjectMocks
     private InputValidator sut;
-    @InjectMocks
-    private SumOfAllDivisors sumOfAllDivisors_sut;
 
     @Test
     public void testValidate_InputWithSplChars_returnsFalse() {

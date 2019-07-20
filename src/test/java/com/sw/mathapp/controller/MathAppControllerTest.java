@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 //@WebMvcTest(MathAppController.class)
-@SpringBoo(classes = MathAppApplication.class)
+@SpringBootTest(classes = MathAppApplication.class)
 @AutoConfigureMockMvc
 @RunWith(MockitoJUnitRunner.class)
 public class MathAppControllerTest {
@@ -38,11 +38,6 @@ public class MathAppControllerTest {
     InputValidator inputValidator;
     @Mock
     SortNumbers sortNumbers;
-    @Mock
-    SumOfAllDivisors sumOfAllDivisors;
-    @Mock
-    private ArrayList<String> mockArrayListForSorting;
-
 
     @Before
     public void init() {
@@ -53,11 +48,6 @@ public class MathAppControllerTest {
     public void testApi_getSortedNumberListController () throws Exception{
 
         Mockito.when(inputValidator.validate("1,2,4,3,5")).thenReturn(true);
-        //Mockito.when(sortNumbers.getSortedNumberList()).thenReturn();
-        mvc.perform( MockMvcRequestBuilders
-                .post("/sortnumbers/{sortNumberInput}",1,2,4,3,5)
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(MockMvcResultMatchers.content().string("1,2,3,4,5"));
+        Mockito.when(sortNumbers.getSortedNumberList("1,2,3,4,5")).thenReturn("1,2,3,4,5");
     }
 }
