@@ -74,6 +74,7 @@
 								<dockerFile>Dockerfile</dockerFile>
 								<assembly>
 									<descriptorRef>artifact</descriptorRef>
+
 								</assembly>
 							</build>
 						</image>
