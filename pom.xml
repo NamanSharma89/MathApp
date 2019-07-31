@@ -71,7 +71,7 @@
 						<image>
 							<name>mathapp/mathapplication</name>
 							<build>
-								<dockerFile>Dockerfile</dockerFile>
+								<dockerFile>../../../Dockerfile</dockerFile>
 								<assembly>
 									<descriptorRef>artifact</descriptorRef>
 
