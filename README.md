@@ -8,3 +8,5 @@ To run
 Sample POST request
 
 localhost:8080/sortnumbers/12,123,11,,,,
+
+Its not a fully automated!! yay!!
