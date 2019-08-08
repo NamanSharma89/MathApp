@@ -36,3 +36,14 @@ Application helps :
     ~~~~
     sudo docker run -p 8080:8080 -d mathapp
     ~~~~
+
+### AWS
+
+##### Deploy Strategy 
+
+- AWS CodePipeline
+    - A push to code repository would auto trigger build and deploy phases after unit tests are run in CodeBuild.
+    - Docker image is created and published to ECR. 
+- ECS with Fargate
+    - Deploy phase of the pipeline would deploy the newly generated container published in ECR to the already Fargate service.
+ 
