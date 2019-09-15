@@ -15,12 +15,12 @@ public class SortNumbers {
 	public String getSortedNumberList(String incomingString) {
 
 		List<String> numbersFromInput = Arrays.asList(incomingString.split("\\s*,\\s*"));
-		ArrayList<Integer> returnReqeustedString = new ArrayList<Integer>(
+		ArrayList<Integer> returnRequestedString = new ArrayList<Integer>(
 				numbersFromInput.stream().map(Integer::parseInt).collect(Collectors.toList()));
 
-		Collections.sort(returnReqeustedString);
+		Collections.sort(returnRequestedString);
 		String resultString = "";
-		for (Integer i : returnReqeustedString) {
+		for (Integer i : returnRequestedString) {
 			resultString += i + ",";
 		}
 
