@@ -16,9 +16,8 @@ spec:
         - name: mathapp
           image: mathapp:v1
           ports:
-            - containerPort: 80
+            - containerPort: 8080
           imagePullPolicy: Never
-
 ---
 
 apiVersion: v1
@@ -31,8 +30,9 @@ spec:
     app: mathapp
   ports:
     # By default and for convenience, the `targetPort` is set to the same value as the `port` field.
-    - port: 80
-      targetPort: 80
+    # you can add more ports to a single service with '-'
+    - port: 3010
+      targetPort: 8080
       # Optional field
       # By default and for convenience, the Kubernetes control plane will allocate a port from a range (default: 30000-32767)
       nodePort: 31000
