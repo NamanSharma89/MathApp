@@ -53,7 +53,7 @@ Parameters:
     ConstraintDescription: Please choose a valid instance type.
   AMIID:
     Type: String
-    Default: ami-040bd2e2325535b3d
+    Default: ami-080c1cc5c78678da8
 
 Conditions:
   CronRate: !Equals [!Ref CronOrRate, cron]
